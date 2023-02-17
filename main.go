@@ -3,10 +3,13 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/Bragoony/funtemps/conv"
 )
 
 // Definerer flag-variablene i hoved-"scope"
 var fahr float64
+var celsius float64
+var kelvin float64
 var out string
 var funfacts string
 
@@ -34,6 +37,42 @@ func init() {
 func main() {
 
 	flag.Parse()
+	
+	// konvertering av Fahrenheit:
+	if out == "C" {
+		celsius := conv.FarhenheitToCelsius(fahr)
+		fmt.Printf("%v degrees to Fahrenheit is %v degrees Celsius\n", fahr, celsius)
+	} else if out == "K" {
+		kelvin := conv.FarhenheitToKelvin(fahr)
+		fmt.Printf("%v degrees to Fahrenheit is %v degrees Kelvin\n", fahr, kelvin)
+	} else {
+		fmt.Printf("Invalid output unit specified\n")
+	}
+
+
+	// konvertering av Celsius:
+	if out == "F" {
+		fahr := conv.CelsiusToFarhenheit(celsius)
+		fmt.Printf("%v degrees to Celsius is %v degrees Fahrenheit\n", celsius, fahr)
+	} else if out == "K" {
+		kelvin := conv.CelsiusToKelvin(celsius)
+		fmt.Printf("%v degrees to Celsius is %v degrees Kelvin\n", celsius, kelvin)
+	} else {
+		fmt.Printf("Invalid output unit specified\n")
+	}
+
+
+	// konvertering av Kelvin:
+	if out == "F" {
+		fahr := conv.KelvinToFarhenheit(kelvin)
+		fmt.Printf("%v degrees to Kelvin is %v degrees Fahrenheit\n", kelvin, fahr)
+	} else if out == "C" {
+		celsius := conv.KelvinToCelsius(kelvin)
+		fmt.Printf("%v degrees to Kelvin is %v degrees Celsius\n", kelvin, celsius)
+	} else {
+		fmt.Printf("Invalid output unit specified\n")
+	}
+
 
 	/**
 	    Her må logikken for flaggene og kall til funksjoner fra conv og funfacts
