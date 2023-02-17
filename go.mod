@@ -1,3 +1,3 @@
-module IS106/funtemps
+module github.com/Bragoony/funtemps
 
 go 1.19
