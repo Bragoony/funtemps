@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/Bragoony/funtemps/conv/"
+	"github.com/Bragoony/funtemps/conv"
 )
 
 // Definerer flag-variablene i hoved-"scope"
@@ -27,6 +27,8 @@ func init() {
 	// Definerer og initialiserer flagg-variablene
 	flag.Float64Var(&fahr, "F", 0.0, "temperatur i grader fahrenheit")
 	// Du må selv definere flag-variablene for "C" og "K"
+	flag.Float64Var(&celsius, "C", 0.0, "temperatur i grader celsius")
+	flag.Float64Var(&kelvin, "K", 0.0, "temperatur i grader kelvin")
 	flag.StringVar(&out, "out", "C", "beregne temperatur i C - celsius, F - farhenheit, K- Kelvin")
 	flag.StringVar(&funfacts, "funfacts", "sun", "\"fun-facts\" om sun - Solen, luna - Månen og terra - Jorden")
 	// Du må selv definere flag-variabelen for -t flagget, som bestemmer
@@ -38,7 +40,50 @@ func main() {
 
 	flag.Parse()
 	
+	// konvertering av Celsius:
+	var res1 float64
+
+	if celsius != 0 {
+		if out == "F" {
+			res1 = conv.CelsiusToFarhenheit(celsius)
+			fmt.Printf("%v °C er %v °F\n", celsius, res1,)
+		} else if out == "K" {
+			res1 = conv.CelsiusToKelvin(celsius)
+			fmt.Printf("%v °C er %v °K\n", celsius, res1,)
+		}
+	}
+	
+
+	// konvertering av farhenheit:
+		var res2 float64
+
+	if fahr != 0 {
+		if out == "C" {
+				res2 = conv.FarhenheitToCelsius(fahr)
+				fmt.Printf("%v °F er %v °C\n", fahr, res2,)
+			} else if out == "K" {
+				res2 = conv.FarhenheitToKelvin(fahr)
+				fmt.Printf("%v °F er %v °C\n", fahr, res2,)
+			}
+			fmt.Printf("%v\n", res2)
+		}
+		
+	// konvertering av kelvin:
+		var res3 float64
+
+		if kelvin != 0 {
+			if out == "C" {
+				res3 = conv.KelvinToCelsius(kelvin)
+				fmt.Printf("%v °K er %v °C\n", kelvin, res3,)
+			} else if out == "F" {
+				res3 = conv.KelvinToFarhenheit(kelvin)
+				fmt.Printf("%v °K er %v °F\n", kelvin, res3,)
+			}
+		}
+
+
 	// konvertering av Fahrenheit:
+	/*
 	if out == "C" {
 		celsius := conv.FarhenheitToCelsius(fahr)
 		fmt.Printf("%v degrees to Fahrenheit is %v degrees Celsius\n", fahr, celsius)
@@ -48,21 +93,11 @@ func main() {
 	} else {
 		fmt.Printf("Invalid output unit specified\n")
 	}
-
-
-	// konvertering av Celsius:
-	if out == "F" {
-		fahr := conv.CelsiusToFarhenheit(celsius)
-		fmt.Printf("%v degrees to Celsius is %v degrees Fahrenheit\n", celsius, fahr)
-	} else if out == "K" {
-		kelvin := conv.CelsiusToKelvin(celsius)
-		fmt.Printf("%v degrees to Celsius is %v degrees Kelvin\n", celsius, kelvin)
-	} else {
-		fmt.Printf("Invalid output unit specified\n")
-	}
+	*/
 
 
 	// konvertering av Kelvin:
+	/*
 	if out == "F" {
 		fahr := conv.KelvinToFarhenheit(kelvin)
 		fmt.Printf("%v degrees to Kelvin is %v degrees Fahrenheit\n", kelvin, fahr)
@@ -72,7 +107,7 @@ func main() {
 	} else {
 		fmt.Printf("Invalid output unit specified\n")
 	}
-
+	*/
 
 	/**
 	    Her må logikken for flaggene og kall til funksjoner fra conv og funfacts
@@ -98,25 +133,26 @@ func main() {
 	*/
 
 	// Her er noen eksempler du kan bruke i den manuelle testingen
-	fmt.Println(fahr, out, funfacts)
+/*	fmt.Println(fahr, out, funfacts)
 
 	fmt.Println("len(flag.Args())", len(flag.Args()))
 	fmt.Println("flag.NFlag()", flag.NFlag())
 
 	fmt.Println(isFlagPassed("out"))
-
+*/	
+ /*
 	// Eksempel på enkel logikk
 	if out == "C" && isFlagPassed("F") {
 		// Kalle opp funksjonen FahrenheitToCelsius(fahr), som da
 		// skal returnere °C
 		fmt.Println("0°F er -17.78°C")
 	}
-
+*/
 }
 
 // Funksjonen sjekker om flagget er spesifisert på kommandolinje
 // Du trenger ikke å bruke den, men den kan hjelpe med logikken
-func isFlagPassed(name string) bool {
+/* func isFlagPassed(name string) bool {
 	found := false
 	flag.Visit(func(f *flag.Flag) {
 		if f.Name == name {
@@ -124,4 +160,6 @@ func isFlagPassed(name string) bool {
 		}
 	})
 	return found
+	
 }
+*/
