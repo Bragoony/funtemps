@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/Bragoony/funtemps/conv"
+	"github.com/Bragoony/funtemps/conv/"
 )
 
 // Definerer flag-variablene i hoved-"scope"
